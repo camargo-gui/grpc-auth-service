@@ -2,8 +2,8 @@ package handler
 
 import (
 	"context"
-	"grcp-auth-service/internal/generated/auth"
-	"grcp-auth-service/internal/service"
+	"grpc-auth-service/internal/generated/auth"
+	"grpc-auth-service/internal/service"
 	"log"
 )
 
@@ -25,5 +25,5 @@ func (handler *UserHandler) Register(ctx context.Context, req *auth.RegisterRequ
 
 	return &auth.RegisterResponse{
 		UserId: userId,
-	}, err
+	}, nil
 }

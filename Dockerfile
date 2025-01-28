@@ -7,7 +7,7 @@ WORKDIR /go/src/app
 COPY . . 
 
 #EXPOSE the port
-EXPOSE 8000
+EXPOSE 50051
 
 # Build the Go app
 RUN go build -o main cmd/main.go

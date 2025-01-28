@@ -1,4 +1,4 @@
-module grcp-auth-service
+module grpc-auth-service
 
 go 1.23
 

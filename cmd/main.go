@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"grcp-auth-service/config"
-	"grcp-auth-service/internal/generated/auth"
-	"grcp-auth-service/internal/handler"
-	"grcp-auth-service/internal/model"
-	"grcp-auth-service/internal/service"
+	"grpc-auth-service/config"
+	"grpc-auth-service/internal/generated/auth"
+	"grpc-auth-service/internal/handler"
+	"grpc-auth-service/internal/model"
+	"grpc-auth-service/internal/service"
 	"log"
 	"net"
 

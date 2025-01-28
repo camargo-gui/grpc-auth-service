@@ -1,14 +1,14 @@
 services:
-  grcp-auth-service:
-    container_name: grcp-auth-service
-    image: grcp-auth-image
+  grpc-auth-service:
+    container_name: grpc-auth-service
+    image: grpc-auth-image
     build: .
     ports:
-      - "8000:8000"
+      - "50051:50051"
     depends_on:
-      - grcp-auth-db
-  grcp-auth-db:
-    container_name: grcp-auth-db
+      - grpc-auth-db
+  grpc-auth-db:
+    container_name: grpc-auth-db
     image: postgres:12
     environment:
       POSTGRES_PASSWORD: 1234

@@ -1,8 +1,8 @@
 package service
 
 import (
-	"grcp-auth-service/internal/generated/auth"
-	"grcp-auth-service/internal/model"
+	"grpc-auth-service/internal/generated/auth"
+	"grpc-auth-service/internal/model"
 
 	"gorm.io/gorm"
 )
@@ -17,20 +17,21 @@ func NewUserService(db *gorm.DB) *UserService {
 	}
 }
 
-func (service *UserService) CreateUser (req *auth.RegisterRequest) (uint32, error) {
-	user := model.User {
-		Name: req.GetName(),
-		Email: req.GetEmail(),
-		Password: req.GetPassword(),
-		Document: req.GetDocument(),
-		Phone: req.GetPhone(),
+func (service *UserService) CreateUser(req *auth.RegisterRequest) (uint32, error) {
+	user := model.User{
+		Name:        req.GetName(),
+		Email:       req.GetEmail(),
+		Password:    req.GetPassword(),
+		Document:    req.GetDocument(),
+		Phone:       req.GetPhone(),
 		DateOfBirth: req.GetDateOfBirth(),
-		TenantID: req.GetTenantId(),
+		TenantID:    req.GetTenantId(),
 	}
 
-	if err := service.DB.Create(&user); err != nil {
-		return 0, err.Error;
+	result := service.DB.Create(&user)
+	if result.Error != nil {
+		return 0, result.Error
 	}
 
-	return user.ID, nil;
+	return user.ID, nil
 }
