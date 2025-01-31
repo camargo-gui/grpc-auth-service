@@ -23,20 +23,42 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	req := &auth.RegisterRequest{
-		TenantId:    uint32(1),
-		Email:       "teste@gmail.com",
-		Name:        "Teste",
-		Password:    "123456",
-		Document:    "12345678901",
-		Phone:       "12345678901",
-		DateOfBirth: "1990-01-01",
-	}
-
-	resp, err := clientConnection.Register(ctx, req)
-	if err != nil {
-		log.Fatalf("Failed to register user: %v", err)
-	}
-
-	log.Println("User registered with ID:", resp.GetUserId())
+	Login(clientConnection, ctx)
 }
+
+func Register(client auth.AuthServiceClient, ctx context.Context) {
+
+	req := &auth.RegisterRequest{
+		Name:        "John Doe",
+		Email:       "gui@gmail.com",
+		Password:    "123456",
+		Document:    "123456789",
+		Phone:       "123456789",
+		DateOfBirth: "1990-01-01",
+		TenantId:    1,
+	}
+
+	resp, err := client.Register(ctx, req)
+	log.Printf("User registered with ID: %v, error: %v", resp.GetUserId(), err)
+}
+
+func Login(client auth.AuthServiceClient, ctx context.Context) {
+	req := &auth.LoginRequest{
+		Email:    "teste@gmail.com",
+		Password: "123456",
+		TenantId: 1,
+	}
+
+	resp, err := client.Login(ctx, req)
+	log.Printf("User logged in with token: %v, error: %v", resp.GetAccessToken(), err)
+}
+
+func Validate(client auth.AuthServiceClient, ctx context.Context) {
+	req := &auth.ValidateRequest{
+		AccessToken: "",
+	}
+
+	resp, err := client.Validate(ctx, req)
+	log.Printf("Token is valid for user: %v, error: %v", resp.GetUserId(), err)
+}
+	
